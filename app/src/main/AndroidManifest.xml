@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.hwx.usbhost.usbhost">
+    <uses-feature android:name="android.hardware.usb.host"/>
+
+    <uses-permission android:name="android.permission.BLUETOOTH" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
+    <uses-permission android:name="android.permission.BLUETOOTH" />
+
+    <application
+        android:name=".Application"
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:largeHeap="true"
+        android:theme="@style/MFP_BaseTheme"
+        >
+        <meta-data
+            android:name="com.hwx.usbhost.usbhost.MyGlideMoudle"
+            android:value="GlideModule" />
+        <activity
+            android:name=".bluetooth.ScaleActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:label="@string/app_name"
+            android:screenOrientation="landscape"
+            android:launchMode="singleTask"
+            >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.hardware.usb.action.USB_DEVICE_ATTACHED" />
+            </intent-filter>
+            <meta-data
+                android:name="android.hardware.usb.action.USB_DEVICE_ATTACHED"
+                android:resource="@xml/device_filter" />
+        </activity>
+        <activity
+            android:name=".activity.FullscreenActivity"
+            android:label="FullscreenActivity"
+            android:screenOrientation="landscape"
+            android:launchMode="singleTop"
+            />
+        <activity
+            android:name=".activity.LoginActivity"
+            android:label="LoginActivity"
+            android:screenOrientation="landscape"
+            android:launchMode="singleTop"
+            />
+        <activity
+            android:name=".activity.CocktailListActivity"
+            android:label="列表"
+            android:screenOrientation="landscape"
+            android:launchMode="singleTop"
+            />
+        <activity
+            android:name=".activity.UpdateCocktailActivity"
+            android:label="配置"
+            android:configChanges="keyboardHidden|screenSize"
+            android:windowSoftInputMode="stateHidden|adjustResize"
+            android:screenOrientation="landscape"
+            android:launchMode="singleTop"
+            />
+        <activity
+            android:name=".activity.OpenDeviceActivity"
+            android:label="调酒"
+            android:screenOrientation="landscape"
+            android:launchMode="singleTop"
+            />
+        <activity
+            android:name=".activity.SettingMenuActivity"
+            android:label="MainActivity"
+            android:configChanges="keyboardHidden|screenSize"
+            android:windowSoftInputMode="stateHidden"
+            android:screenOrientation="landscape"
+            android:launchMode="singleTop"
+            />
+        <activity
+            android:name=".activity.UpdateAccessoriesActivity"
+            android:label="配置"
+            android:screenOrientation="landscape"
+            android:launchMode="singleTop"
+            />
+        <activity
+            android:name=".activity.UpdateOrnamentActivity"
+            android:label="配置"
+            android:screenOrientation="landscape"
+            android:launchMode="singleTop"
+            />
+        <activity
+        android:name=".activity.UpdateTimePositionItemActivity"
+            android:configChanges="keyboardHidden|screenSize"
+            android:windowSoftInputMode="adjustPan"
+            android:screenOrientation="landscape"
+            android:launchMode="singleTop"
+            />
+        <activity
+            android:name=".activity.UpdateTimePositionActivity"
+            android:configChanges="keyboardHidden|screenSize"
+            android:windowSoftInputMode="adjustPan"
+            android:screenOrientation="landscape"
+            android:launchMode="singleTop"
+            />
+        <activity
+            android:name=".activity.SettingSlideActivity"
+            android:configChanges="keyboardHidden|screenSize"
+            android:windowSoftInputMode="adjustPan|stateHidden"
+            android:screenOrientation="landscape"
+            android:launchMode="singleTop"
+            />
+        <activity
+            android:name=".activity.TestPageActivity"
+            android:configChanges="keyboardHidden|screenSize"
+            android:windowSoftInputMode="adjustPan"
+            android:screenOrientation="landscape"
+            android:launchMode="singleTop"
+            />
+        <activity
+            android:name=".activity.MultiplecupActivity"
+            android:configChanges="keyboardHidden|screenSize"
+            android:windowSoftInputMode="adjustPan"
+            android:screenOrientation="landscape"
+            android:launchMode="singleTop"
+            />
+        <activity
+            android:name=".activity.MainActivity"
+            />
+
+        <activity android:name=".bluetooth.DeviceListActivity"
+            android:label="@string/select_device"
+            android:theme="@android:style/Theme.Dialog"
+            android:configChanges="orientation|keyboardHidden"
+            android:screenOrientation="landscape"
+            android:launchMode="singleTop"
+            />
+    </application>
+
+</manifest>

@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg"
+    >
+        <android.support.design.widget.AppBarLayout
+            android:id="@+id/id_appbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fitsSystemWindows="true">
+
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:theme="?mfp_toolbar_theme"
+                />
+
+        </android.support.design.widget.AppBarLayout>
+    <Button
+        android:text="@string/vckjkjcka"
+        android:layout_width="300dp"
+        android:layout_height="@dimen/btn_height"
+        android:maxHeight="@dimen/btn_height"
+        android:id="@+id/totest"
+        android:background="@drawable/btn_rect_bg_gray"
+        android:textColor="@color/white"
+        android:gravity="center"
+        android:layout_gravity="center"
+        />
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:layout_margin="5dp"
+        >
+        <Button
+            android:text="test at\n gate 1"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="80dp"
+            android:id="@+id/test1"
+            android:layout_margin="2dp"
+            />
+        <Button
+            android:text="test at\n gate 2"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="80dp"
+            android:id="@+id/test2"
+            android:layout_margin="2dp"
+            />
+        <Button
+            android:text="test at\n gate 3"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="80dp"
+            android:id="@+id/test3"
+            android:layout_margin="2dp"
+            />
+        <Button
+            android:text="test at\n gate 4"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="80dp"
+            android:id="@+id/test4"
+            android:layout_margin="2dp"
+            />
+        <Button
+            android:text="test at\n gate 5"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="80dp"
+            android:id="@+id/test5"
+            android:layout_margin="2dp"
+            />
+        <Button
+            android:text="test at\n gate 6"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="80dp"
+            android:id="@+id/test6"
+            android:layout_margin="2dp"
+            />
+        <Button
+            android:text="test at\n gate 7"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="80dp"
+            android:id="@+id/test7"
+            android:layout_margin="2dp"
+            />
+        <Button
+            android:text="test at\n gate 8"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="80dp"
+            android:id="@+id/test8"
+            android:layout_margin="2dp"
+            />
+        </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:layout_margin="5dp"
+        >
+        <Button
+            android:text="test at\n gate 9"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="80dp"
+            android:id="@+id/test9"
+            android:layout_margin="2dp"
+            />
+        <Button
+            android:text="test at\n gate 10"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="80dp"
+            android:id="@+id/test10"
+            android:layout_margin="2dp"
+            />
+        <Button
+            android:text="test at\n gate 11"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="80dp"
+            android:id="@+id/test11"
+            android:layout_margin="2dp"
+            />
+        <Button
+            android:text="test at\n gate 12"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="80dp"
+            android:id="@+id/test12"
+            android:layout_margin="2dp"
+            />
+        <Button
+            android:text="test at\n gate 13"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="80dp"
+            android:id="@+id/test13"
+            android:layout_margin="2dp"
+            />
+        <Button
+            android:text="test at\n gate 14"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="80dp"
+            android:id="@+id/test14"
+            android:layout_margin="2dp"
+            />
+        <Button
+            android:text="test at\n gate 15"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="80dp"
+            android:id="@+id/test15"
+            android:layout_margin="2dp"
+            />
+        <Button
+            android:text="test at\n gate 16"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="80dp"
+            android:id="@+id/test16"
+            android:layout_margin="2dp"
+            />
+        </LinearLayout>
+    <Button
+        android:text="@string/cvvkjasjkkjdf"
+        android:layout_width="180dp"
+        android:layout_height="@dimen/btn_height"
+        android:layout_margin="10dp"
+        android:id="@+id/pause"
+        android:background="@drawable/btn_rect_bg_gray"
+        android:textColor="@color/white"
+        android:gravity="center"
+        android:layout_gravity="center"
+        />
+</LinearLayout>

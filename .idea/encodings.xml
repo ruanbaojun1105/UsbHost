@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="Encoding" native2AsciiForPropertiesFiles="true" defaultCharsetForPropertiesFiles="UTF-8">
+    <file url="file://$PROJECT_DIR$/ChooceFilelibrary" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/app/src/main/java/com/hwx/usbhost/usbhost/AppConfig.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/app/src/main/java/com/hwx/usbhost/usbhost/Application.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/app/src/main/java/com/hwx/usbhost/usbhost/Constants.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/app/src/main/java/com/hwx/usbhost/usbhost/activity/CocktailListActivity.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/app/src/main/java/com/hwx/usbhost/usbhost/activity/FullscreenActivity.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/app/src/main/java/com/hwx/usbhost/usbhost/activity/LoginActivity.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/app/src/main/java/com/hwx/usbhost/usbhost/activity/MainActivity.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/app/src/main/java/com/hwx/usbhost/usbhost/activity/MultiplecupActivity.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/app/src/main/java/com/hwx/usbhost/usbhost/activity/OpenDeviceActivity.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/app/src/main/java/com/hwx/usbhost/usbhost/activity/SettingMenuActivity.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/app/src/main/java/com/hwx/usbhost/usbhost/activity/SettingSlideActivity.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/app/src/main/java/com/hwx/usbhost/usbhost/activity/TestPageActivity.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/app/src/main/java/com/hwx/usbhost/usbhost/activity/UpdateAccessoriesActivity.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/app/src/main/java/com/hwx/usbhost/usbhost/activity/UpdateCocktailActivity.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/app/src/main/java/com/hwx/usbhost/usbhost/activity/UpdateOrnamentActivity.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/app/src/main/java/com/hwx/usbhost/usbhost/activity/UpdateTimePositionActivity.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/app/src/main/java/com/hwx/usbhost/usbhost/activity/UpdateTimePositionItemActivity.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/app/src/main/java/com/hwx/usbhost/usbhost/adapter/CocktaillistAdapter.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/app/src/main/java/com/hwx/usbhost/usbhost/adapter/EditListAdapter.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/app/src/main/java/com/hwx/usbhost/usbhost/adapter/GlassListAdapter.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/app/src/main/java/com/hwx/usbhost/usbhost/adapter/ImageListAdapter.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/app/src/main/java/com/hwx/usbhost/usbhost/adapter/MultipleCupListAdapter.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/app/src/main/java/com/hwx/usbhost/usbhost/adapter/TextListAdapter.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/app/src/main/java/com/hwx/usbhost/usbhost/adapter/TimePositinListAdapter.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/app/src/main/java/com/hwx/usbhost/usbhost/bluetooth/BluetoothService.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/app/src/main/java/com/hwx/usbhost/usbhost/bluetooth/DeviceListActivity.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/app/src/main/java/com/hwx/usbhost/usbhost/bluetooth/ScaleActivity.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/app/src/main/java/com/hwx/usbhost/usbhost/bluetooth/StringHexUtils.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/app/src/main/java/com/hwx/usbhost/usbhost/db/manager/GreenDaoManager.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/app/src/main/java/com/hwx/usbhost/usbhost/db/manager/UserManager.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/app/src/main/java/com/hwx/usbhost/usbhost/util/DialogUtil.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/app/src/main/java/com/hwx/usbhost/usbhost/util/FileUtil.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/app/src/main/java/com/hwx/usbhost/usbhost/util/HttpUtil.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/app/src/main/java/com/hwx/usbhost/usbhost/util/LogUtils.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/app/src/main/java/com/hwx/usbhost/usbhost/util/TestGetInt.java" charset="UTF-8" />
+    <file url="PROJECT" charset="UTF-8" />
+  </component>
+</project>

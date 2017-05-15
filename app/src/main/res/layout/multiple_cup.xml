@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg"
+    >
+
+    <android.support.design.widget.AppBarLayout
+        android:id="@+id/id_appbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fitsSystemWindows="true">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:theme="?mfp_toolbar_theme"
+            />
+
+    </android.support.design.widget.AppBarLayout>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    >
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recycler_list"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:scrollbars="vertical"
+            android:layout_alignParentTop="true">
+        </android.support.v7.widget.RecyclerView>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:id="@+id/bottom_lin"
+        android:layout_below="@+id/recycler_list"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
+        <Button
+            android:text="@string/dsatratt"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:id="@+id/next_btn"
+            android:textStyle="bold"
+            android:background="@drawable/btn_rect_bg_gray"
+            android:textColor="@color/white"
+            android:layout_marginLeft="20dp"
+            android:textSize="15sp"
+            />
+        <Button
+            android:text="back"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:id="@+id/back"
+            android:textStyle="bold"
+            android:background="@drawable/btn_rect_bg_gray"
+            android:textColor="@color/white"
+            android:layout_marginLeft="70dp"
+            android:layout_marginRight="20dp"
+            android:textSize="15sp"
+            />
+    </LinearLayout>
+</RelativeLayout>
+    </LinearLayout>
