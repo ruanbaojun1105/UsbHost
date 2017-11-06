@@ -14,6 +14,7 @@ import android.widget.Toast;
 import com.hwx.usbhost.usbhost.AppConfig;
 import com.hwx.usbhost.usbhost.R;
 import com.hwx.usbhost.usbhost.util.DialogUtil;
+import com.hwx.usbhost.usbhost.util.InterFaceUtil;
 
 /**
  * An example full-screen activity that shows and hides the system UI (i.e.
@@ -69,7 +70,12 @@ public class SettingMenuActivity extends BaseActivity implements View.OnClickLis
                 startActivity(intent);
                 break;
             case R.id.password_set:
-                DialogUtil.showEditDialog(SettingMenuActivity.this, getString(R.string.shurumima), PASSWORD, str -> Toast.makeText(SettingMenuActivity.this, R.string.cdasdv, Toast.LENGTH_SHORT).show());
+                DialogUtil.showEditDialog(SettingMenuActivity.this, getString(R.string.shurumima), PASSWORD, new InterFaceUtil.OnclickInterFace() {
+                    @Override
+                    public void onClick(String str) {
+                        Toast.makeText(SettingMenuActivity.this, R.string.cdasdv, Toast.LENGTH_SHORT).show();
+                    }
+                });
                 break;
             case R.id.ornament_set:
                 startActivity(new Intent(this, UpdateOrnamentActivity.class));

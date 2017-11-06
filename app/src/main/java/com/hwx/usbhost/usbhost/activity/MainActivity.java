@@ -14,6 +14,7 @@ import android.hardware.usb.UsbInterface;
 import android.hardware.usb.UsbManager;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -48,8 +49,11 @@ public class MainActivity extends Activity {
 		registerReceiver(mUsbPermissionActionReceiver, filter);
 
 		info = (TextView) findViewById(R.id.info);
-		info.setOnClickListener((v)->{
-			//do somethings
+		info.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+
+			}
 		});
 
 		/*info.postDelayed(()->{

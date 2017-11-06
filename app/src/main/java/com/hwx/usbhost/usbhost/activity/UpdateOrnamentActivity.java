@@ -52,32 +52,49 @@ public class UpdateOrnamentActivity extends BaseActivity {
         adapter = new TextListAdapter(list);
         adapter.openLoadAnimation();
         View head = getLayoutInflater().inflate(R.layout.add_item, (ViewGroup) mRecyclerView.getParent(), false);
-        head.findViewById(R.id.opendevice).setOnClickListener(view -> {
-            DialogUtil.showEditDialog(this, getString(R.string.addas), null, str -> {
-                OrnamentMoreDaoManager.getOrnamentMoreDaoManager().addOrnament(new Ornament(null,str));
-                adapter.add(0,str);
-            },true);
+        head.findViewById(R.id.opendevice).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                DialogUtil.showEditDialog(UpdateOrnamentActivity.this, getString(R.string.addas), null, new InterFaceUtil.OnclickInterFace() {
+                    @Override
+                    public void onClick(String str) {
+                        OrnamentMoreDaoManager.getOrnamentMoreDaoManager().addOrnament(new Ornament(null,str));
+                        adapter.add(0,str);
+                    }
+                }, true);
+            }
         });
         adapter.addHeaderView(head);
-        adapter.setEmptyView(false, head);
+        adapter.setEmptyView( head);
         SpacesItemDecoration decoration = new SpacesItemDecoration(10);
         mRecyclerView.addItemDecoration(decoration);
         mRecyclerView.setAdapter(adapter);
-        adapter.setOnRecyclerViewItemClickListener((view, i) ->
-                DialogUtil.showListDialog(this, null, new String[]{"edit", "delete"}, which -> {
-                    switch (which){
-                        case 0:
-                            DialogUtil.showEditDialog(UpdateOrnamentActivity.this, getString(R.string.upddataeda)+adapter.getItem(i), null, str -> {
-                                OrnamentMoreDaoManager.getOrnamentMoreDaoManager().updateOrnament(adapter.getItem(i),str);
-                                initData();
-                                adapter.setNewData(list);
-                            },true);
-                            break;
-                        case 1:
-                            OrnamentMoreDaoManager.getOrnamentMoreDaoManager().delOrnament(adapter.getItem(i));
-                            adapter.remove(i);
-                            break;
+        adapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(BaseQuickAdapter adapter1, View view, final int position) {
+                DialogUtil.showListDialog(UpdateOrnamentActivity.this, null, new String[]{"edit", "delete"}, new InterFaceUtil.DialogListListener() {
+                    @Override
+                    public void todosomething(int which) {
+                        switch (which){
+                            case 0:
+                                DialogUtil.showEditDialog(UpdateOrnamentActivity.this, getString(R.string.upddataeda) + adapter.getItem(position), null,
+                                        new InterFaceUtil.OnclickInterFace() {
+                                            @Override
+                                            public void onClick(String str) {
+                                                OrnamentMoreDaoManager.getOrnamentMoreDaoManager().updateOrnament(adapter.getItem(position),str);
+                                                initData();
+                                                adapter.setNewData(list);
+                                            }
+                                        }, true);
+                                break;
+                            case 1:
+                                OrnamentMoreDaoManager.getOrnamentMoreDaoManager().delOrnament(adapter.getItem(position));
+                                adapter.remove(position);
+                                break;
+                        }
                     }
-                }));
+                });
+            }
+        });
     }
 }

@@ -64,7 +64,7 @@ public class UpdateTimePositionItemActivity extends AppCompatActivity {
     }
 
     public static void initData(String name, Activity activity,TextView name_tv,LinearLayout much_lin) {
-        List<CocktailFormula> cocktailFormulaList = CocktailFormulaDaoManager.getCocktailFormulaDaoManager().queryList(name);
+        final List<CocktailFormula> cocktailFormulaList = CocktailFormulaDaoManager.getCocktailFormulaDaoManager().queryList(name);
         Collections.sort(cocktailFormulaList, new ListSort());
         name_tv.setText(activity.getString(R.string.winename) + name);
 
@@ -80,9 +80,9 @@ public class UpdateTimePositionItemActivity extends AppCompatActivity {
             }
 
             @Override
-            public void justItemToDo(Object data, View item, int position, Context context) {
-                TextView position_tv = (TextView) item.findViewById(R.id.position_tv);
-                EditText time_tv = (EditText) item.findViewById(R.id.time_tv);
+            public void justItemToDo(Object data, View item, int position, final Context context) {
+                final TextView position_tv = (TextView) item.findViewById(R.id.position_tv);
+                final EditText time_tv = (EditText) item.findViewById(R.id.time_tv);
                 if (cocktailFormulaList.size() > position) {
                     position_tv.setText(cocktailFormulaList.get(position).getPosition());
                     time_tv.setText(cocktailFormulaList.get(position).getTime());
@@ -101,13 +101,23 @@ public class UpdateTimePositionItemActivity extends AppCompatActivity {
                             Toast.makeText(context, context.getString(R.string.daiuda),Toast.LENGTH_SHORT).show();
                         }
                     }));*/
-                    time_tv.setOnClickListener(view -> DialogUtil.showEditDialog((Activity) context, context.getString(R.string.hdfsa)+position_tv.getText()+context.getString(R.string.daskjj), "", str -> {
-                        if (TextUtils.isDigitsOnly(str)){
-                            time_tv.setText(str);
-                        }else {
-                            Toast.makeText(context, context.getString(R.string.dfhdasjkkj),Toast.LENGTH_SHORT).show();
+                    time_tv.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            DialogUtil.showEditDialog((Activity) context,
+                                    context.getString(R.string.hdfsa) + position_tv.getText() + context.getString(R.string.daskjj), "",
+                                    new InterFaceUtil.OnclickInterFace() {
+                                        @Override
+                                        public void onClick(String str) {
+                                            if (TextUtils.isDigitsOnly(str)){
+                                                time_tv.setText(str);
+                                            }else {
+                                                Toast.makeText(context, context.getString(R.string.dfhdasjkkj),Toast.LENGTH_SHORT).show();
+                                            }
+                                        }
+                                    });
                         }
-                    }));
+                    });
                 }
             }
         });
@@ -130,16 +140,25 @@ public class UpdateTimePositionItemActivity extends AppCompatActivity {
         name_tv = (TextView) findViewById(R.id.name_tv);
         much_lin = (LinearLayout) findViewById(R.id.much_lin);
         save_item = (TextView) findViewById(R.id.save_item);
-        save_item.setOnClickListener(view -> {
-            save_item(much_lin,name);
-            onBackPressed();
+        save_item.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                save_item(much_lin,name);
+                onBackPressed();
+            }
         });
         TextView clear_item = (TextView) findViewById(R.id.clear_item);
-        clear_item.setOnClickListener(view -> {
-            CocktailFormulaDaoManager.getCocktailFormulaDaoManager().delOne(name);
-            runOnUiThread(() -> {
-                initData(name,UpdateTimePositionItemActivity.this,name_tv,much_lin);
-            });
+        clear_item.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                CocktailFormulaDaoManager.getCocktailFormulaDaoManager().delOne(name);
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        initData(name,UpdateTimePositionItemActivity.this,name_tv,much_lin);
+                    }
+                });
+            }
         });
         //scrollView = (ScrollView) findViewById(R.id.scrollView);
         /*scrollView.setOnScrollChangeListener((view, i, i1, i2, i3) -> {

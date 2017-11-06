@@ -13,7 +13,7 @@ import com.hwx.usbhost.usbhost.util.LogUtils;
 
 import java.util.List;
 
-public class TextListAdapter extends BaseQuickAdapter<String> {
+public class TextListAdapter extends BaseQuickAdapter<String,BaseViewHolder> {
 	public TextListAdapter(List<String> list){
 		super(R.layout.list_item,list);
 	}

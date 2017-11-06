@@ -24,6 +24,7 @@ import com.hwx.usbhost.usbhost.bluetooth.BluetoothService;
 import com.hwx.usbhost.usbhost.db.CocktailFormula;
 import com.hwx.usbhost.usbhost.db.manager.CocktailFormulaDaoManager;
 import com.hwx.usbhost.usbhost.util.DialogUtil;
+import com.hwx.usbhost.usbhost.util.InterFaceUtil;
 import com.hwx.usbhost.usbhost.util.ListSort;
 
 import java.util.ArrayList;
@@ -102,7 +103,12 @@ public class SettingSlideActivity extends BaseActivity implements View.OnClickLi
                 peifangjinzhi.setText(getString(R.string.vicicdkr)+(AppConfig.getInstance().getBoolean("peifangjinzhi",false)?"ON":"OFF") );
                 break;
             case R.id.password_up:
-                DialogUtil.showEditDialog(SettingSlideActivity.this, getString(R.string.shurumima), Pass, str -> Toast.makeText(SettingSlideActivity.this, R.string.kcvjcadjf, Toast.LENGTH_SHORT).show());
+                DialogUtil.showEditDialog(SettingSlideActivity.this, getString(R.string.shurumima), Pass, new InterFaceUtil.OnclickInterFace() {
+                    @Override
+                    public void onClick(String str) {
+                        Toast.makeText(SettingSlideActivity.this, R.string.kcvjcadjf, Toast.LENGTH_SHORT).show();
+                    }
+                });
                 break;
             case R.id.save:
                 submit();

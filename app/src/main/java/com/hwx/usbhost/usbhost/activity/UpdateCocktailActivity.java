@@ -22,6 +22,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.hwx.usbhost.usbhost.R;
 import com.hwx.usbhost.usbhost.adapter.GlassListAdapter;
 import com.hwx.usbhost.usbhost.adapter.ImageListAdapter;
@@ -36,6 +37,7 @@ import com.hwx.usbhost.usbhost.db.manager.GlassDaoManager;
 import com.hwx.usbhost.usbhost.db.manager.OrnamentMoreDaoManager;
 import com.hwx.usbhost.usbhost.util.DialogUtil;
 import com.hwx.usbhost.usbhost.util.DrawableUtil;
+import com.hwx.usbhost.usbhost.util.InterFaceUtil;
 import com.hwx.usbhost.usbhost.widget.CommentLinearLayout;
 import com.hwx.usbhost.usbhost.widget.ViewReUseFaceListener;
 import com.nbsp.materialfilepicker.MaterialFilePicker;
@@ -163,14 +165,17 @@ public class UpdateCocktailActivity extends BaseActivity implements View.OnClick
             }
 
             @Override
-            public void justItemToDo(Object data, View itemView, int position, Context context) {
+            public void justItemToDo(Object data, View itemView, final int position, Context context) {
                 TextView item_del = (TextView) itemView.findViewById(R.id.item_del);
                 TextView item_text = (TextView) itemView.findViewById(R.id.item_text);
                 OrnamentMore aa = (OrnamentMore) data;
                 item_text.setText(aa.getOrnament());
-                item_del.setOnClickListener(view -> {
-                    ornamentList.remove(position);
-                    initOrnament(ornamentList);
+                item_del.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        ornamentList.remove(position);
+                        initOrnament(ornamentList);
+                    }
                 });
             }
         });
@@ -191,14 +196,17 @@ public class UpdateCocktailActivity extends BaseActivity implements View.OnClick
             }
 
             @Override
-            public void justItemToDo(Object data, View itemView, int position, Context context) {
+            public void justItemToDo(Object data, View itemView, final int position, Context context) {
                 TextView item_del = (TextView) itemView.findViewById(R.id.item_del);
                 TextView item_text = (TextView) itemView.findViewById(R.id.item_text);
                 AccessoriesMore aa = (AccessoriesMore) data;
                 item_text.setText(aa.getAccessories() + "*" + aa.getAccessoriesNumber());
-                item_del.setOnClickListener(view -> {
-                    accessoriesList.remove(position);
-                    initAccessories(accessoriesList);
+                item_del.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        accessoriesList.remove(position);
+                        initAccessories(accessoriesList);
+                    }
                 });
             }
         });
@@ -228,18 +236,24 @@ public class UpdateCocktailActivity extends BaseActivity implements View.OnClick
         add_tv = (TextView) findViewById(R.id.add_tv);
         reduce_tv = (TextView) findViewById(R.id.reduce_tv);
         number_tv = (TextView) findViewById(R.id.number_tv);
-        add_tv.setOnClickListener(view -> {
-            int a = Integer.parseInt(number_tv.getText().toString()) + 1;
-            number_tv.setText(String.valueOf(a >= 30 ? 30 : a));
+        add_tv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int a = Integer.parseInt(number_tv.getText().toString()) + 1;
+                number_tv.setText(String.valueOf(a >= 30 ? 30 : a));
+            }
         });
-        reduce_tv.setOnClickListener(view -> {
-            int a = Integer.parseInt(number_tv.getText().toString()) - 1;
-            number_tv.setText(String.valueOf(a > 0 ? a : 1));
+        reduce_tv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int a = Integer.parseInt(number_tv.getText().toString()) - 1;
+                number_tv.setText(String.valueOf(a > 0 ? a : 1));
+            }
         });
 
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(recyclerView.getContext()));
-        adapter = new TextListAdapter(new ArrayList<>());
+        adapter = new TextListAdapter(new ArrayList<String>());
 
         recyclerView.setAdapter(adapter);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
@@ -282,10 +296,13 @@ public class UpdateCocktailActivity extends BaseActivity implements View.OnClick
                     return;
                 }
                 number_head.setVisibility(View.VISIBLE);
-                adapter.setOnRecyclerViewItemClickListener((view, i) -> {
-                    behavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
-                    accessoriesList.add(new AccessoriesMore(null, cocktail.getName(), adapter.getItem(i), number_tv.getText().toString()));
-                    initAccessories(accessoriesList);
+                adapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(BaseQuickAdapter adapter1, View view, int position) {
+                        behavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
+                        accessoriesList.add(new AccessoriesMore(null, cocktail.getName(), adapter.getItem(position), number_tv.getText().toString()));
+                        initAccessories(accessoriesList);
+                    }
                 });
                 adapter.setNewData(AccessoriesMoreDaoManager.getAccessoriesMoreDaoManager().queryListNew());
                 if (behavior.getState() == BottomSheetBehavior.STATE_COLLAPSED) {
@@ -300,10 +317,13 @@ public class UpdateCocktailActivity extends BaseActivity implements View.OnClick
                     return;
                 }
                 number_head.setVisibility(View.GONE);
-                adapter.setOnRecyclerViewItemClickListener((view, i) -> {
-                    behavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
-                    ornamentList.add(new OrnamentMore(null, cocktail.getName(), adapter.getItem(i)));
-                    initOrnament(ornamentList);
+                adapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(BaseQuickAdapter adapter1, View view, int position) {
+                        behavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
+                        ornamentList.add(new OrnamentMore(null, cocktail.getName(), adapter.getItem(position)));
+                        initOrnament(ornamentList);
+                    }
                 });
                 adapter.setNewData(OrnamentMoreDaoManager.getOrnamentMoreDaoManager().queryListNew());
                 if (behavior.getState() == BottomSheetBehavior.STATE_COLLAPSED) {
@@ -320,51 +340,60 @@ public class UpdateCocktailActivity extends BaseActivity implements View.OnClick
                 openImageLibrary(1);
                 break;
             case R.id.image_glass:
-                DialogUtil.showGlassEditDialog(this,new GlassListAdapter(GlassDaoManager.getGlassManager().queryList()), item -> {
-                    //image_glass.setImageResource(GlassListAdapter.getTypeUrl(glass.getType()));
-                    if (item instanceof Glass) {
-                        Glass glass= (Glass) item;
-                        //Toast.makeText(UpdateCocktailActivity.this, glass.getName() + glass.getType(), Toast.LENGTH_SHORT).show();
-                        DrawableUtil.displayImage(UpdateCocktailActivity.this,image_glass,GlassListAdapter.getTypeUrl(glass.getType()));
-                        cocktail.setGlass(String.valueOf(glass.getType()));
+                DialogUtil.showGlassEditDialog(this, new GlassListAdapter(GlassDaoManager.getGlassManager().queryList()), new InterFaceUtil.DialogGlassListener() {
+                    @Override
+                    public void todosomething(Object item) {
+                        //image_glass.setImageResource(GlassListAdapter.getTypeUrl(glass.getType()));
+                        if (item instanceof Glass) {
+                            Glass glass= (Glass) item;
+                            //Toast.makeText(UpdateCocktailActivity.this, glass.getName() + glass.getType(), Toast.LENGTH_SHORT).show();
+                            DrawableUtil.displayImage(UpdateCocktailActivity.this,image_glass,GlassListAdapter.getTypeUrl(glass.getType()));
+                            cocktail.setGlass(String.valueOf(glass.getType()));
+                        }
                     }
                 });
                 break;
         }
     }
 
-    private void openImageLibrary(int code) {
-        DialogUtil.showListDialog(this, null, new String[]{"File choose","Built in image"}, which -> {
-            switch (which){
-                case 0:
-                    new MaterialFilePicker()
-                            .withActivity(this)
-                            .withRequestCode(code)
-                            //.withFilter(Pattern.compile(".*\\.png$")) // Filtering files and directories by file name using regexp
-                            .withFilterDirectories(false) // Set directories filterable (false by default)
-                            .withHiddenFiles(false) //��ʾ���ص��ļ��к��ļ�
-                            .withRootPath(Environment.getExternalStorageDirectory().getPath())
-                            .start();
+    private void openImageLibrary(final int code) {
+        DialogUtil.showListDialog(this, null, new String[]{"File choose", "Built in image"}, new InterFaceUtil.DialogListListener() {
+            @Override
+            public void todosomething(int which) {
+                switch (which){
+                    case 0:
+                        new MaterialFilePicker()
+                                .withActivity(UpdateCocktailActivity.this)
+                                .withRequestCode(code)
+                                //.withFilter(Pattern.compile(".*\\.png$")) // Filtering files and directories by file name using regexp
+                                .withFilterDirectories(false) // Set directories filterable (false by default)
+                                .withHiddenFiles(false) //��ʾ���ص��ļ��к��ļ�
+                                .withRootPath(Environment.getExternalStorageDirectory().getPath())
+                                .start();
                 /*Intent intent = new Intent(PassWordActivity.this, FilePickerActivity.class);
                 intent.putExtra(FilePickerActivity.ARG_FILTER, Pattern.compile(".*\\.txt$"));
                 intent.putExtra(FilePickerActivity.ARG_DIRECTORIES_FILTER, true);
                 intent.putExtra(FilePickerActivity.ARG_SHOW_HIDDEN, true);
                 startActivityForResult(intent, 1);*/
-                    break;
-                case 1:
-                    List<ImageListAdapter.ImageItem> list= new ArrayList<>();
-                    for (int i = 1; i < 36; i++) {
-                        list.add(new ImageListAdapter.ImageItem(i,String.valueOf(i)));
-                    }
-                    DialogUtil.showGlassEditDialog(this,new ImageListAdapter(list), item -> {
-                        //image_glass.setImageResource(GlassListAdapter.getTypeUrl(glass.getType()));
-                        if (item instanceof ImageListAdapter.ImageItem) {
-                            ImageListAdapter.ImageItem glass= (ImageListAdapter.ImageItem) item;
-                            cocktail.setPreviewImage(String.valueOf(glass.getType()));
-                            DrawableUtil.displayImage(this,image_img,ImageListAdapter.getImageTypeUrl(glass.getType()));
+                        break;
+                    case 1:
+                        List<ImageListAdapter.ImageItem> list= new ArrayList<>();
+                        for (int i = 1; i < 36; i++) {
+                            list.add(new ImageListAdapter.ImageItem(i,String.valueOf(i)));
                         }
-                    });
-                    break;
+                        DialogUtil.showGlassEditDialog(UpdateCocktailActivity.this, new ImageListAdapter(list), new InterFaceUtil.DialogGlassListener() {
+                            @Override
+                            public void todosomething(Object item) {
+                                //image_glass.setImageResource(GlassListAdapter.getTypeUrl(glass.getType()));
+                                if (item instanceof ImageListAdapter.ImageItem) {
+                                    ImageListAdapter.ImageItem glass= (ImageListAdapter.ImageItem) item;
+                                    cocktail.setPreviewImage(String.valueOf(glass.getType()));
+                                    DrawableUtil.displayImage(UpdateCocktailActivity.this,image_img,ImageListAdapter.getImageTypeUrl(glass.getType()));
+                                }
+                            }
+                        });
+                        break;
+                }
             }
         });
     }

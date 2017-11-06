@@ -10,6 +10,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.hwx.usbhost.usbhost.R;
 import com.hwx.usbhost.usbhost.adapter.SpacesItemDecoration;
 import com.hwx.usbhost.usbhost.adapter.TextListAdapter;
@@ -21,6 +22,7 @@ import com.hwx.usbhost.usbhost.db.manager.AccessoriesMoreDaoManager;
 import com.hwx.usbhost.usbhost.db.manager.CocktailManager;
 import com.hwx.usbhost.usbhost.db.manager.OrnamentMoreDaoManager;
 import com.hwx.usbhost.usbhost.util.DialogUtil;
+import com.hwx.usbhost.usbhost.util.InterFaceUtil;
 
 import java.util.List;
 
@@ -52,32 +54,48 @@ public class UpdateAccessoriesActivity extends BaseActivity {
         adapter = new TextListAdapter(list);
         adapter.openLoadAnimation();
         View head = getLayoutInflater().inflate(R.layout.add_item, (ViewGroup) mRecyclerView.getParent(), false);
-        head.findViewById(R.id.opendevice).setOnClickListener(view -> {
-            DialogUtil.showEditDialog(this, getString(R.string.newalike), null, str -> {
-                AccessoriesMoreDaoManager.getAccessoriesMoreDaoManager().addAccessories(new Accessories(null,str));
-                adapter.add(0,str);
-            },true);
+        head.findViewById(R.id.opendevice).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                DialogUtil.showEditDialog(UpdateAccessoriesActivity.this, getString(R.string.newalike), null, new InterFaceUtil.OnclickInterFace() {
+                    @Override
+                    public void onClick(String str) {
+                        AccessoriesMoreDaoManager.getAccessoriesMoreDaoManager().addAccessories(new Accessories(null,str));
+                        adapter.add(0,str);
+                    }
+                }, true);
+            }
         });
         adapter.addHeaderView(head);
-        adapter.setEmptyView(false, head);
+        adapter.setEmptyView(head);
         SpacesItemDecoration decoration = new SpacesItemDecoration(10);
         mRecyclerView.addItemDecoration(decoration);
         mRecyclerView.setAdapter(adapter);
-        adapter.setOnRecyclerViewItemClickListener((view, i) ->
-                DialogUtil.showListDialog(this, null, new String[]{"edit", "delete"}, which -> {
-                    switch (which){
-                        case 0:
-                            DialogUtil.showEditDialog(UpdateAccessoriesActivity.this, getString(R.string.modifyas)+adapter.getItem(i), null, str -> {
-                                AccessoriesMoreDaoManager.getAccessoriesMoreDaoManager().updateAccessories(adapter.getItem(i),str);
-                                initData();
-                                adapter.setNewData(list);
-                            },true);
-                            break;
-                        case 1:
-                            AccessoriesMoreDaoManager.getAccessoriesMoreDaoManager().delAccessories(adapter.getItem(i));
-                            adapter.remove(i);
-                            break;
+        adapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(final BaseQuickAdapter adapter1, View view, final int position) {
+                DialogUtil.showListDialog(UpdateAccessoriesActivity.this, null, new String[]{"edit", "delete"}, new InterFaceUtil.DialogListListener() {
+                    @Override
+                    public void todosomething(int which) {
+                        switch (which) {
+                            case 0:
+                                DialogUtil.showEditDialog(UpdateAccessoriesActivity.this, getString(R.string.modifyas) + adapter.getItem(position), null, new InterFaceUtil.OnclickInterFace() {
+                                    @Override
+                                    public void onClick(String str) {
+                                        AccessoriesMoreDaoManager.getAccessoriesMoreDaoManager().updateAccessories(adapter.getItem(position), str);
+                                        initData();
+                                        adapter.setNewData(list);
+                                    }
+                                }, true);
+                                break;
+                            case 1:
+                                AccessoriesMoreDaoManager.getAccessoriesMoreDaoManager().delAccessories(adapter.getItem(position));
+                                adapter.remove(position);
+                                break;
+                        }
                     }
-                }));
+                });
+            }
+        });
     }
 }

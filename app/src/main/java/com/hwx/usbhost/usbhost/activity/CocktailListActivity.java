@@ -61,11 +61,14 @@ public class CocktailListActivity extends BaseActivity implements SwipeRefreshLa
         if (isEdit) {
             if (!AppConfig.getInstance().getBoolean("peifangjinzhi",false)) {
                 View head = getLayoutInflater().inflate(R.layout.add_item, (ViewGroup) mRecyclerView.getParent(), false);
-                head.findViewById(R.id.opendevice).setOnClickListener(view -> {
-                    UpdateCocktailActivity.openIntance(this, null);
+                head.findViewById(R.id.opendevice).setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        UpdateCocktailActivity.openIntance(CocktailListActivity.this, null);
+                    }
                 });
                 adapter.addHeaderView(head);
-                adapter.setEmptyView(false, head);
+                //adapter.setEmptyView(false, head);
             }
         }
         //设置item之间的间隔

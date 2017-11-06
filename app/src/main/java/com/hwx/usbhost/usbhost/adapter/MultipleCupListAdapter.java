@@ -11,7 +11,7 @@ import com.hwx.usbhost.usbhost.db.Cocktail;
 import java.io.Serializable;
 import java.util.List;
 
-public class MultipleCupListAdapter extends BaseQuickAdapter<MultipleCupListAdapter.CupItem> {
+public class MultipleCupListAdapter extends BaseQuickAdapter<MultipleCupListAdapter.CupItem,BaseViewHolder> {
 	public MultipleCupListAdapter(List<CupItem> list){
 		super(R.layout.cup_list_item,list);
 	}

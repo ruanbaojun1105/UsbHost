@@ -45,24 +45,34 @@ public class DialogUtil {
         new AlertDialog.Builder(activity).setTitle(title)
                 //.setIcon(android.R.drawable.ic_menu_send)
                 .setView(et)
-                .setPositiveButton(R.string.dfdfd, (dialog, which) -> {
-                    if (activity==null)
-                        return;
-                    InputMethodManager imm = (InputMethodManager) activity.getSystemService(Context.INPUT_METHOD_SERVICE);
-                    imm.hideSoftInputFromWindow(et.getWindowToken(), 0);
-                    final String input = et.getText().toString();
-                    if (TextUtils.isEmpty(input))
-                        return;
-                    if (!TextUtils.isEmpty(arg))
-                        AppConfig.getInstance().putString(arg,input);
-                    if (onclickInterFace!=null){
-                        activity.runOnUiThread(() -> onclickInterFace.onClick(input));
+                .setPositiveButton(R.string.dfdfd, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        if (activity==null)
+                            return;
+                        InputMethodManager imm = (InputMethodManager) activity.getSystemService(Context.INPUT_METHOD_SERVICE);
+                        imm.hideSoftInputFromWindow(et.getWindowToken(), 0);
+                        final String input = et.getText().toString();
+                        if (TextUtils.isEmpty(input))
+                            return;
+                        if (!TextUtils.isEmpty(arg))
+                            AppConfig.getInstance().putString(arg,input);
+                        if (onclickInterFace!=null){
+                            activity.runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    onclickInterFace.onClick(input);
+                                }
+                            });
+                        }
                     }
-
                 })
-                .setNegativeButton(R.string.vdadsr, (dialogInterface, i) -> {
-                    InputMethodManager imm = (InputMethodManager) activity.getSystemService(Context.INPUT_METHOD_SERVICE);
-                    imm.hideSoftInputFromWindow(et.getWindowToken(), 0);
+                .setNegativeButton(R.string.vdadsr, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        InputMethodManager imm = (InputMethodManager) activity.getSystemService(Context.INPUT_METHOD_SERVICE);
+                        imm.hideSoftInputFromWindow(et.getWindowToken(), 0);
+                    }
                 })
                 .show();
     }
@@ -73,24 +83,34 @@ public class DialogUtil {
         new AlertDialog.Builder(activity).setTitle(title)
                 .setIcon(android.R.drawable.ic_menu_send)
                 .setView(et)
-                .setPositiveButton(R.string.dfdfd, (dialog, which) -> {
-                    if (activity==null)
-                        return;
-                    InputMethodManager imm = (InputMethodManager) activity.getSystemService(Context.INPUT_METHOD_SERVICE);
-                    imm.hideSoftInputFromWindow(et.getWindowToken(), 0);
-                    final String input = et.getText().toString();
-                    if (TextUtils.isEmpty(input))
-                        return;
-                    if (!TextUtils.isEmpty(arg))
-                        AppConfig.getInstance().putString(arg,input);
-                    if (onclickInterFace!=null){
-                        activity.runOnUiThread(() -> onclickInterFace.onClick(input));
+                .setPositiveButton(R.string.dfdfd, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        if (activity==null)
+                            return;
+                        InputMethodManager imm = (InputMethodManager) activity.getSystemService(Context.INPUT_METHOD_SERVICE);
+                        imm.hideSoftInputFromWindow(et.getWindowToken(), 0);
+                        final String input = et.getText().toString();
+                        if (TextUtils.isEmpty(input))
+                            return;
+                        if (!TextUtils.isEmpty(arg))
+                            AppConfig.getInstance().putString(arg,input);
+                        if (onclickInterFace!=null){
+                            activity.runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    onclickInterFace.onClick(input);
+                                }
+                            });
+                        }
                     }
-
                 })
-                .setNegativeButton(R.string.vdadsr, (dialogInterface, i) -> {
-                    InputMethodManager imm = (InputMethodManager) activity.getSystemService(Context.INPUT_METHOD_SERVICE);
-                    imm.hideSoftInputFromWindow(et.getWindowToken(), 0);
+                .setNegativeButton(R.string.vdadsr, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        InputMethodManager imm = (InputMethodManager) activity.getSystemService(Context.INPUT_METHOD_SERVICE);
+                        imm.hideSoftInputFromWindow(et.getWindowToken(), 0);
+                    }
                 })
                 .show();
     }
@@ -111,10 +131,13 @@ public class DialogUtil {
         builder.setCancelable(true);
         if (!TextUtils.isEmpty(title))
             builder.setTitle(title);
-        builder.setItems(items, (dialog, which) -> {
-            if (listListener!=null)
-                listListener.todosomething(which);
-            dialog.dismiss();
+        builder.setItems(items, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                if (listListener!=null)
+                    listListener.todosomething(which);
+                dialog.dismiss();
+            }
         });
         Dialog dialog=builder.create();
         dialog.setCanceledOnTouchOutside(true);
@@ -132,7 +155,7 @@ public class DialogUtil {
         dialog.setCancelable(true);
         dialog.setCanceledOnTouchOutside(true);
         Display d = activity.getWindowManager().getDefaultDisplay(); // 为获取屏幕宽、高
-        WindowManager.LayoutParams p = dialog.getWindow().getAttributes(); // 获取对话框当前的参数值
+        final WindowManager.LayoutParams p = dialog.getWindow().getAttributes(); // 获取对话框当前的参数值
         p.width =(int)( d.getWidth()*0.7);
         p.height =(int)( d.getHeight()*0.8);
         dialog.getWindow().setAttributes(p);
@@ -148,13 +171,21 @@ public class DialogUtil {
         SpacesItemDecoration decoration = new SpacesItemDecoration(10);
         mRecyclerView.addItemDecoration(decoration);
         mRecyclerView.setAdapter(adapter);
-        adapter.setOnRecyclerViewItemClickListener((view, i) -> {
-            Object item=adapter.getItem(i);
-            if (onclickInterFace!=null){
-                if (activity!=null)
-                    activity.runOnUiThread(() -> onclickInterFace.todosomething(item));
+        adapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+                final Object item=adapter.getItem(position);
+                if (onclickInterFace!=null){
+                    if (activity!=null)
+                        activity.runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                onclickInterFace.todosomething(item);
+                            }
+                        });
+                }
+                dialog.dismiss();
             }
-            dialog.dismiss();
         });
         dialog.show();
     }

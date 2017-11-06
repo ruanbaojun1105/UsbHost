@@ -9,6 +9,8 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.Button;
+
+import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.hwx.usbhost.usbhost.R;
 import com.hwx.usbhost.usbhost.adapter.MultipleCupListAdapter;
 import com.hwx.usbhost.usbhost.adapter.SpacesItemDecoration;
@@ -58,12 +60,15 @@ public class MultiplecupActivity extends BaseActivity implements View.OnClickLis
         SpacesItemDecoration decoration = new SpacesItemDecoration(10);
         mRecyclerView.addItemDecoration(decoration);
         mRecyclerView.setAdapter(adapter);
-        adapter.setOnRecyclerViewItemClickListener((view, i) -> {
-            Intent intent = new Intent(MultiplecupActivity.this, CocktailListActivity.class);
-            intent.putExtra(ISFORRESULT, true);
-            intent.putExtra("position", i);
-            LogUtils.e("发送了位置为："+i);
-            startActivityForResult(intent, FORRESULT_AA);
+        adapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+                Intent intent = new Intent(MultiplecupActivity.this, CocktailListActivity.class);
+                intent.putExtra(ISFORRESULT, true);
+                intent.putExtra("position", position);
+                LogUtils.e("发送了位置为："+position);
+                startActivityForResult(intent, FORRESULT_AA);
+            }
         });
     }
     @Override

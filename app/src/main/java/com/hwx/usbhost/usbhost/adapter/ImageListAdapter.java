@@ -1,5 +1,7 @@
 package com.hwx.usbhost.usbhost.adapter;
 
+import android.widget.ImageView;
+
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.hwx.usbhost.usbhost.R;
@@ -8,7 +10,7 @@ import com.hwx.usbhost.usbhost.util.DrawableUtil;
 
 import java.util.List;
 
-public class ImageListAdapter extends BaseQuickAdapter<ImageListAdapter.ImageItem> {
+public class ImageListAdapter extends BaseQuickAdapter<ImageListAdapter.ImageItem,BaseViewHolder> {
 	public ImageListAdapter(List<ImageItem> list){
 		super(R.layout.glass_item,list);
 	}
@@ -17,7 +19,7 @@ public class ImageListAdapter extends BaseQuickAdapter<ImageListAdapter.ImageIte
     protected void convert(BaseViewHolder baseViewHolder, ImageItem glass) {
         baseViewHolder.setText(R.id.type,glass.getName());
         //baseViewHolder.setImageResource(R.id.image,getTypeUrl(glass.getType()));
-        DrawableUtil.displayImage(baseViewHolder.convertView.getContext(),baseViewHolder.getView(R.id.image),getImageTypeUrl(glass.getType()));
+        DrawableUtil.displayImage(baseViewHolder.convertView.getContext(), (ImageView) baseViewHolder.getView(R.id.image),getImageTypeUrl(glass.getType()));
     }
 
     public static int getImageTypeUrl(int type) {
